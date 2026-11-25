@@ -2,6 +2,7 @@ package com.sparta.paymentsystem.domain.order.entity;
 
 import com.sparta.paymentsystem.domain.product.entity.Product;
 import com.sparta.paymentsystem.global.entity.BaseTimeEntity;
+
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -49,4 +50,7 @@ public class OrderItem extends BaseTimeEntity {
 		return orderPrice * quantity;
 	}
 
+	public Long getProductId() {
+		return this.product.getId();
+	}
 }
