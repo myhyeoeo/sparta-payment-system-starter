@@ -5,7 +5,9 @@ import com.sparta.paymentsystem.domain.cart.entity.CartItem;
 import com.sparta.paymentsystem.domain.cart.repository.CartItemRepository;
 import com.sparta.paymentsystem.global.error.BusinessException;
 import com.sparta.paymentsystem.global.error.ErrorCode;
+
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,6 +55,14 @@ public class CartService {
 		if (deleted == 0) {
 			throw new BusinessException(ErrorCode.CART_ITEM_NOT_FOUND);
 		}
+	}
+
+	public List<CartItem> findCartEntities(Long memberId) {
+		return cartItemRepository.findByMemberId(memberId);
+	}
+
+	public List<CartItem> findCartEntitiesByIds(Long memberId, List<Long> cartItemIds){
+		return cartItemRepository.findByIdInAndMember_IdWithProduct(cartItemIds,memberId);
 	}
 
 	private CartItemResponse toResponse(CartItem item) {
