@@ -50,6 +50,10 @@ public class Payment extends BaseTimeEntity {
 		return "pay_" + UUID.randomUUID();
 	}
 
+	public void markAsCancelled() {
+		changeStatus(PaymentStatus.CANCELLED);
+	}
+
 	public void markAsPaid() {
 		changeStatus(PaymentStatus.PAID);
 		this.paidAt = LocalDateTime.now();
